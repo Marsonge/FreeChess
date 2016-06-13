@@ -72,9 +72,8 @@ public class Jeu implements Game {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
 	public String toString() {
-		return "Jeu [pieces=" + pieces + "]";
+		return "Jeu "+ this.couleur +", pieces=" + pieces;
 	}
 
 	private Pieces findPiece(int x, int y) {
@@ -106,8 +105,13 @@ public class Jeu implements Game {
 	}
 
 	public static void main(String[] args) {
-		Jeu jeu = new Jeu(Couleur.BLANC);
-		System.out.println(jeu);
+		Jeu blancs = new Jeu(Couleur.BLANC);
+		Jeu noirs = new Jeu(Couleur.NOIR);
+		System.out.println(blancs);
+		System.out.println(noirs);
+		
+		System.out.println(blancs.move(7, 7, 7, 4));
+		System.out.println(blancs);
 	}
 
 }
