@@ -35,7 +35,10 @@ public class Echiquier implements BoardGames {
 
 	@Override
 	public Couleur getPieceColor(int x, int y) {
-		// TODO Auto-generated method stub
+		if(w.getPieceColor(x, y) != null)
+			return w.getPieceColor(x,y);
+		if(b.getPieceColor(x,y) != null)
+			return b.getPieceColor(x, y);
 		return null;
 	}
 
@@ -70,6 +73,9 @@ public class Echiquier implements BoardGames {
 		System.out.println(e);
 		e.move(0, 0, 7, 0);
 		System.out.println(e);
+		e.move(0, 0, 0, 7);
+		System.out.println(e);
+
 	}
 
 	public boolean isMoveOk(int xi, int yi, int xf, int yf) {
@@ -77,13 +83,11 @@ public class Echiquier implements BoardGames {
 			if(w.isPieceHere(xf, yf)){
 				if(current==w)
 					return false;
-				w.capture(xf,yf);
 				return true;
 			}
 			else if(b.isPieceHere(xf, yf)){
 				if(current==b)
 					return false;
-				b.capture(xf,yf);
 				return true;
 			}
 			return true;
@@ -95,6 +99,12 @@ public class Echiquier implements BoardGames {
 	@Override
 	public boolean move(int xi, int yi, int xf, int yf) {
 		if(isMoveOk(xi, yi, xf, yf)){
+			if(w.isPieceHere(xf, yf)){
+					w.capture(xf,yf);
+			}
+			else if(b.isPieceHere(xf, yf)){
+					b.capture(xf,yf);
+			}
 			return current.move(xi, yi, xf, yf);
 		}
 		return false;
