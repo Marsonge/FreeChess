@@ -118,7 +118,10 @@ public abstract class AbstractPiece implements Pieces{
 		this.couleur = couleur;
 	}
 	@Override
-	public abstract boolean capture();
+	public boolean capture(){
+		this.coord = new Coord(-1,-1);
+		return true;
+	}
 
 	@Override
 	public Couleur getCouleur(){

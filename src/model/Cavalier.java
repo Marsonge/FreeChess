@@ -6,11 +6,6 @@ public class Cavalier extends AbstractPiece{
 		super(couleur, coord);
 	}
 
-	@Override
-	public boolean capture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public String getName() {

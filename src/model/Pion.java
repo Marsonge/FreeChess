@@ -11,11 +11,6 @@ public class Pion extends AbstractPiece {
 		enPassant = false;
 	}
 
-	@Override
-	public boolean capture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	@Override
 	public boolean move(int x, int y){

@@ -6,11 +6,6 @@ public class Roi extends AbstractPiece {
 		super(couleur, coord);
 	}
 
-	@Override
-	public boolean capture() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk,
