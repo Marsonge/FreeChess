@@ -25,7 +25,7 @@ public class Pion extends AbstractPiece {
 	@Override
 	public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk,
 			boolean isCastlingPossible) {
-		if(this.getCouleur().equals(Couleur.BLANC)){
+		if(this.getCouleur().equals(Couleur.NOIR)){
 			if(yFinal - this.coord.y == 1){
 				if(firstMove)
 					firstMove = false;
