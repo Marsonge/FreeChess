@@ -148,12 +148,9 @@ public abstract class AbstractPiece implements Pieces{
 
 	@Override
 	public boolean move(int x, int y){
-		if(this.isMoveOk(x,y,true,true)){
-			this.coord.x = x;
-			this.coord.y = y;
-			return true;
-		}
-		return false;
+		this.coord.x = x;
+		this.coord.y = y;
+		return true;
 	}
 
 	@Override

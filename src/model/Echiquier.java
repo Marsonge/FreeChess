@@ -63,7 +63,10 @@ public class Echiquier implements BoardGames {
 	public static void main(String args[]) {
 		Echiquier e = new Echiquier();
 		System.out.println(e);
-		e.move(1,6,1,4);
+		e.move(1,6,1,5);
+		e.move(2,7,0,5);
+		e.move(0,5,4,1);
+
 		System.out.println(e);
 	}
 
