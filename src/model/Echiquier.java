@@ -169,16 +169,8 @@ public class Echiquier implements BoardGames {
 	}
 
 	private boolean isBishopBlocked(int xi, int yi, int xf, int yf) {
-		int incrx = xi - xf;
-		if(incrx > 0)
-			incrx = -1;
-		else
-			incrx = 1;
-		int incry = yi - yf;
-		if(incry > 0)
-			incry = -1;
-		else
-			incry = 1;
+		int incrx = xi - xf/Math.abs(xi-xf);
+		int incry = yi - yf/Math.abs(yi-yf);
 		int i = xi + incrx;
 		int j = yi + incry;
 		while(i != xf && j != yf){
