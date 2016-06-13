@@ -9,8 +9,6 @@ public abstract class AbstractPiece implements Pieces{
 		System.out.println("####TEST DES PIECES####");
 		System.out.println("##ROOK##");
 		Pieces maTour = new Tour(Couleur.NOIR, new Coord(0, 0));
-		System.out.println(maTour.getX());
-		System.out.println(maTour.getY());
 		System.out.println(maTour);
 		maTour.move(3, 0);
 		System.out.println(maTour);
@@ -24,8 +22,6 @@ public abstract class AbstractPiece implements Pieces{
 		System.out.println(maTour);
 		System.out.println("##KNIGHT##");
 		Pieces monCav = new Cavalier(Couleur.NOIR, new Coord(3, 3));
-		System.out.println(monCav.getX());
-		System.out.println(monCav.getY());
 		System.out.println(monCav);
 		monCav.move(4,1);
 		System.out.println(monCav);
@@ -54,19 +50,34 @@ public abstract class AbstractPiece implements Pieces{
 		System.out.println("###PAWN###");
 		Pieces bP = new Pion(Couleur.NOIR, new Coord(7,7));
 		System.out.println(bP);
+		//Can't go horizontally
 		bP.move(6,7);
 		System.out.println(bP);
+		//Can go down!
 		bP.move(7,6);
 		System.out.println(bP);
+		//Can't go up
 		bP.move(7,7);
+		System.out.println(bP);
+		//First move not available, now :-/
+		bP.move(7,4);
 		System.out.println(bP);
 		Pieces wP = new Pion(Couleur.BLANC, new Coord(0,0));
 		System.out.println(wP);
+		//Not horizontally
 		wP.move(1,0);
 		System.out.println(wP);
-		wP.move(0,1);
+		//Moving two blocks
+		wP.move(0,2);
 		System.out.println(wP);
+		//Not back though!
 		wP.move(0,0);
+		System.out.println(wP);
+		//First move: done
+		wP.move(0,4);
+		System.out.println(wP);
+		//Can still move normal tho
+		wP.move(0,3);
 		System.out.println(wP);
 
 	}
