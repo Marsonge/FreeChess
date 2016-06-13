@@ -14,21 +14,20 @@ public class Pion extends AbstractPiece {
 	
 	@Override
 	public boolean move(int x, int y){
+		if(firstMove)
+			firstMove = false;
 		return super.move(x,y);
 	}
 
 	@Override
 	public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk,
 			boolean isCastlingPossible) {
+		System.out.println("hello");
 		if(this.getCouleur().equals(Couleur.NOIR)){
 			if(yFinal - this.coord.y == 1){
-				if(firstMove)
-					firstMove = false;
 				return true;
 			}
 			if(yFinal - this.coord.y == 2 && firstMove){
-				firstMove = false;
-				enPassant = true;
 				return true;
 			}
 		}
@@ -37,10 +36,10 @@ public class Pion extends AbstractPiece {
 				return true;
 			}
 			if(this.coord.y - yFinal == 2 && firstMove){
-				firstMove = false;
-				enPassant = true;
+				return true;
 			}
 		}
+		System.out.println(":(");
 		return false;
 	}
 	

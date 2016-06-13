@@ -63,35 +63,48 @@ public class Echiquier implements BoardGames {
 	public static void main(String args[]) {
 		Echiquier e = new Echiquier();
 		System.out.println(e);
+		e.move(1,6,1,4);
 		System.out.println(e);
-		System.out.println(e.move(0, 7, 6, 7));
-		System.out.println(e.move(4, 3, 1, 2));
-		System.out.println(e.move(7, 7, 4, 3));
-		e.switchPlayer();
-		System.out.println(e);
-		e.move(1,0,2,2);
-		System.out.println(e);
-		e.move(0, 0, 7, 0);
-		System.out.println(e);
-		e.move(0, 0, 0, 7);
-		System.out.println(e);
-
 	}
 
 	public boolean isMoveOk(int xi, int yi, int xf, int yf) {
 		if(current.isMoveOk(xi, yi, xf, yf, true, true)){
+			String name = current.getPieceName(xi, yi);
+			if(name.equals("Bishop")){
+				if(isBishopBlocked(xi,yi,xf,yf))
+					return false;
+			}
 			if(w.isPieceHere(xf, yf)){
 				if(current==w)
 					return false;
-				return true;
 			}
 			else if(b.isPieceHere(xf, yf)){
 				if(current==b)
 					return false;
-				return true;
 			}
 			return true;
-			
+		}
+		return false;
+	}
+
+	private boolean isBishopBlocked(int xi, int yi, int xf, int yf) {
+		int incrx = xi - xf;
+		if(incrx > 0)
+			incrx = -1;
+		else
+			incrx = 1;
+		int incry = yi - yf;
+		if(incry > 0)
+			incry = -1;
+		else
+			incry = 1;
+		int i = xi + incrx;
+		int j = yi + incry;
+		while(i != xf && j != yf){
+			if(w.isPieceHere(i, j) || b.isPieceHere(i, j))
+				return true;
+			i += incrx;
+			j += incry;
 		}
 		return false;
 	}
