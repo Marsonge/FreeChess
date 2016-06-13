@@ -31,7 +31,11 @@ public class Jeu implements Game {
 	}
 
 	public String getPieceName(int x, int y) {
-		return this.findPiece(x, y).getName();
+		try{
+		return this.findPiece(x, y).getName();}
+		catch(NullPointerException e){
+			return null;
+		}
 	}
 
 	public void setCastling() {
