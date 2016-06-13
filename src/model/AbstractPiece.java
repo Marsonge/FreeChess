@@ -33,7 +33,7 @@ public abstract class AbstractPiece implements Pieces{
 		monCav.move(2,5);
 		monCav.move(1,7);
 		System.out.println(monCav);
-		//Out of bonds test
+		//Out of bounds test
 		monCav.move(2,9);
 		System.out.println(monCav);
 		System.out.println("##BISHOP##");
@@ -79,6 +79,37 @@ public abstract class AbstractPiece implements Pieces{
 		//Can still move normal tho
 		wP.move(0,3);
 		System.out.println(wP);
+		System.out.println("##KING##");
+		Pieces monRoi = new Roi(Couleur.BLANC, new Coord(0,0));
+		System.out.println(monRoi);
+		monRoi.move(1,1);
+		System.out.println(monRoi);
+		monRoi.move(2,0);
+		System.out.println(monRoi);
+		//Out of bounds
+		monRoi.move(2,-1);
+		System.out.println(monRoi);
+		monRoi.move(2,1);
+		System.out.println(monRoi);
+		//Impossible move
+		monRoi.move(4,1);
+		System.out.println(monRoi);
+		System.out.println("##QUEEN##");
+		Pieces maReine = new Reine(Couleur.BLANC, new Coord(0,0));
+		System.out.println(maReine);
+		//Diagonal
+		maReine.move(3,3);
+		System.out.println(maReine);
+		//Lateral
+		maReine.move(3,7);
+		System.out.println(maReine);
+		//Invalid
+		maReine.move(4,5);
+		System.out.println(maReine);
+		//Out of bounds
+		maReine.move(3,8);
+		System.out.println(maReine);
+
 
 	}
 	
