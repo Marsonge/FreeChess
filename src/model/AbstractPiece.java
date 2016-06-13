@@ -51,11 +51,29 @@ public abstract class AbstractPiece implements Pieces{
 		//Out of bounds
 		monFou.move(8, 8);
 		System.out.println(monFou);
+		System.out.println("###PAWN###");
+		Pieces bP = new Pion(Couleur.NOIR, new Coord(7,7));
+		System.out.println(bP);
+		bP.move(6,7);
+		System.out.println(bP);
+		bP.move(7,6);
+		System.out.println(bP);
+		bP.move(7,7);
+		System.out.println(bP);
+		Pieces wP = new Pion(Couleur.BLANC, new Coord(0,0));
+		System.out.println(wP);
+		wP.move(1,0);
+		System.out.println(wP);
+		wP.move(0,1);
+		System.out.println(wP);
+		wP.move(0,0);
+		System.out.println(wP);
 
 	}
 	
 	public AbstractPiece(Couleur couleur, Coord coord){
 		this.coord = coord;
+		this.couleur = couleur;
 	}
 	@Override
 	public abstract boolean capture();
