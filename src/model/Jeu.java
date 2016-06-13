@@ -12,8 +12,25 @@ public class Jeu implements Game {
 	private boolean castling;
 
 	public Jeu(Couleur couleur) {
+		this.castling = true;
 		this.couleur = couleur;
 		this.pieces = ChessPiecesFactory.newPieces(couleur);
+	}
+
+	public Couleur getCouleur() {
+		return this.couleur;
+	}
+
+	public Couleur getPieceColor(int x, int y) {
+		return this.findPiece(x, y).getCouleur();
+	}
+
+	public String getPieceName(int x, int y) {
+		return this.findPiece(x, y).getName();
+	}
+
+	public void setCastling() {
+		this.castling = false;
 	}
 
 	@Override
@@ -49,6 +66,10 @@ public class Jeu implements Game {
 	public boolean capture(int xCatch, int yCatch) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public void setPossibleCapture(){
+		// TODO Auto-generated method stub
 	}
 
 	@Override
