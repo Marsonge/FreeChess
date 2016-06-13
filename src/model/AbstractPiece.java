@@ -3,12 +3,25 @@ package model;
 public abstract class AbstractPiece implements Pieces{
 
 	private Couleur couleur;
-	private int x;
-	private int y;
+	protected Coord coord;
 	
-	private AbstractPiece(Couleur couleur, Coord coord){
-		int x = coord.x;
-		int y = coord.y;
+	public static void main(String args[]){
+		Pieces maTour = new Tour(Couleur.NOIR, new Coord(0, 0));
+		System.out.println(maTour.getX());
+		System.out.println(maTour.getY());
+		System.out.println(maTour);
+		maTour.move(3, 0);
+		System.out.println(maTour);
+		maTour.move(4,7);
+		System.out.println(maTour);
+		maTour.move(3,8);
+		System.out.println(maTour);
+		maTour.move(3,7);
+		System.out.println(maTour);
+	}
+	
+	public AbstractPiece(Couleur couleur, Coord coord){
+		this.coord = coord;
 	}
 	@Override
 	public abstract boolean capture();
@@ -18,17 +31,18 @@ public abstract class AbstractPiece implements Pieces{
 		return couleur;
 	}
 
-	@Override
-	public abstract String getName();
+	public String getName(){
+		return "";
+	}
 
 	@Override
 	public int getX(){
-		return x;
+		return coord.x;
 	}
 
 	@Override
 	public int getY(){
-		return y;
+		return coord.y;
 	}
 	
 	@Override
@@ -36,7 +50,14 @@ public abstract class AbstractPiece implements Pieces{
 			boolean isCastlingPossible);
 
 	@Override
-	public abstract boolean move(int xFinal, int yFinal);
+	public boolean move(int x, int y){
+		if(this.isMoveOk(x,y,true,true)){
+			this.coord.x = x;
+			this.coord.y = y;
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public String toString() {
