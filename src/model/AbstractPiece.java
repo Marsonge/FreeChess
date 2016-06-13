@@ -40,7 +40,18 @@ public abstract class AbstractPiece implements Pieces{
 		//Out of bonds test
 		monCav.move(2,9);
 		System.out.println(monCav);
-		
+		System.out.println("##BISHOP##");
+		Pieces monFou = new Fou(Couleur.NOIR, new Coord(0,0));
+		System.out.println(monFou);
+		monFou.move(2,2);
+		System.out.println(monFou);
+		//Incorrect move
+		monFou.move(3,2);
+		System.out.println(monFou);
+		//Out of bounds
+		monFou.move(8, 8);
+		System.out.println(monFou);
+
 	}
 	
 	public AbstractPiece(Couleur couleur, Coord coord){
