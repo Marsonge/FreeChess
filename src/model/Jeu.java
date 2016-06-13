@@ -64,8 +64,12 @@ public class Jeu implements Game {
 
 	@Override
 	public boolean capture(int xCatch, int yCatch) {
-		// TODO Auto-generated method stub
-		return false;
+		Pieces piece = this.findPiece(xCatch, yCatch);
+		try {
+			return piece.capture();
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 	
 	public void setPossibleCapture(){
@@ -110,7 +114,7 @@ public class Jeu implements Game {
 		System.out.println(blancs);
 		System.out.println(noirs);
 		
-		System.out.println(blancs.move(7, 7, 7, 4));
+		System.out.println(blancs.move(0, 7, 6, 7));
 		System.out.println(blancs);
 	}
 
