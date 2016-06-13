@@ -22,7 +22,12 @@ public class Jeu implements Game {
 	}
 
 	public Couleur getPieceColor(int x, int y) {
-		return this.findPiece(x, y).getCouleur();
+		try{
+			return this.findPiece(x, y).getCouleur();
+		}catch(NullPointerException e){
+			return null;
+		}
+		
 	}
 
 	public String getPieceName(int x, int y) {
