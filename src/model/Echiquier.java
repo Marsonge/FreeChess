@@ -70,70 +70,47 @@ public class Echiquier implements BoardGames {
 
 	public boolean isMoveOk(int xi, int yi, int xf, int yf) {
 		String name = current.getPieceName(xi, yi);
-
-		if(current.isMoveOk(xi, yi, xf, yf, true, true)){
-			if(name.equals("Bishop")){
-				if(isBishopBlocked(xi,yi,xf,yf)){
+		boolean isCatchOk = false;
+		boolean isCastlingPossible = true;
+		if(w.isPieceHere(xf, yf)){
+			if(current==w){
+				this.setMessage("There's an allied piece on the way. " + current.getCouleur() + " to play.");
+				return false;
+			}
+			isCatchOk = true;
+			
+		}
+		else if(b.isPieceHere(xf, yf)){
+			if(current==b){
+				this.setMessage("There's an allied piece on the way. " + current.getCouleur() + " to play.");
+				return false;
+			}
+			isCatchOk = true;
+		}
+		if(current.isMoveOk(xi, yi, xf, yf, isCatchOk, isCastlingPossible)){
+				if(isPieceBlocked(xi,yi,xf,yf)){
 					this.setMessage("The way isn't clear to move. " + current.getCouleur() + " to play.");
 					return false;
 				}
-			}
-			if(name.equals("Pawn")){
-				if(!(isPawnCapturing(xi,yi,xf,yf)) && Math.abs(xi - xf) == 1){
-					this.setMessage("This move is illegal. " + current.getCouleur() + " to play.");
-					return false;
-				}
-				if(isPawnBlocked(xi,yi,xf,yf) && !isPawnCapturing(xi, yi, xf, yf)){
-					this.setMessage("The way isn't clear to move. " + current.getCouleur() + " to play.");
-					return false;
-				}
-			}
-			if(name.equals("Rook")){
-				if(isRookBlocked(xi,xf,yi,yf)){
-					this.setMessage("The way isn't clear to move. " + current.getCouleur() + " to play.");
-					return false;
-				}
-			}
-			if(name.equals("Queen")){
-				if(isQueenBlocked(xi,xf,yi,yf)){
-					this.setMessage("The way isn't clear to move. " + current.getCouleur() + " to play.");
-					return false;
-				}
-			}
-			if(w.isPieceHere(xf, yf)){
-				if(current==w){
-					this.setMessage("There's an allied piece on the way. " + current.getCouleur() + " to play.");
-					return false;
-				}
-			}
-			else if(b.isPieceHere(xf, yf)){
-				if(current==b){
-					this.setMessage("There's an allied piece on the way. " + current.getCouleur() + " to play.");
-					return false;
-				}
-			}
 			return true;
 		}
 		this.setMessage("This move is illegal. " + current.getCouleur() + " to play.");
 		return false;
 	}
 
-	private boolean isQueenBlocked(int xi, int xf, int yi, int yf) {
-		if(Math.abs(xi-yi) == Math.abs(xf-yf)){
-			return isBishopBlocked(xi,xf,yi,yf);
+	private boolean isPieceBlocked(int xi, int xf, int yi, int yf) {
+		if(Math.abs(xi-yi) == Math.abs(xf-yf)){ //If the piece is moving diagonally
+			return isDiagonalBlocked(xi,xf,yi,yf);
 		}
-		else{
-			return isRookBlocked(xi,xf,yi,yf);
+		else if(xi==xf ^ yi==yf){ //If the piece is moving laterally
+			return isLateralBlocked(xi,xf,yi,yf);
 		}
+		return false; //If it's not moving laterally or diagonally, it's a knight : can't be blocked
 	}
 
-	private boolean isRookBlocked(int xi, int xf, int yi, int yf) {
+	private boolean isLateralBlocked(int xi, int xf, int yi, int yf) {
 		if(xi-xf == 0){
-			int incr = yi - yf;
-			if(incr > 0)
-				incr = -1;
-			else
-				incr = 1;
+			int incr = (yf - yi) / Math.abs(yf-yi); //Figures out which way to go : up or down
 			int i = yi + incr;
 			while(i != yf){
 				if(w.isPieceHere(xi, i) || b.isPieceHere(xi, i))
@@ -142,11 +119,7 @@ public class Echiquier implements BoardGames {
 			}
 		}
 		else{
-			int incr = xi - xf;
-			if(incr > 0)
-				incr = -1;
-			else
-				incr = 1;
+			int incr = (xf - xi) / Math.abs(xf-xi); //Figures out which way to go : left or right
 			int i = xi + incr;
 			while(i != xf){
 				if(w.isPieceHere(i, yi) || b.isPieceHere(i, yi))
@@ -158,19 +131,9 @@ public class Echiquier implements BoardGames {
 		
 	}
 
-	private boolean isPawnBlocked(int xi, int yi, int xf, int yf) {
-		return w.isPieceHere(xf, yf) || b.isPieceHere(xf, yf);
-	}
-
-	private boolean isPawnCapturing(int xi, int yi, int xf, int yf) {
-		if(current == w)
-			return b.isPieceHere(xf,yf);
-		return w.isPieceHere(xf,yf);
-	}
-
-	private boolean isBishopBlocked(int xi, int yi, int xf, int yf) {
-		int incrx = xi - xf/Math.abs(xi-xf);
-		int incry = yi - yf/Math.abs(yi-yf);
+	private boolean isDiagonalBlocked(int xi, int yi, int xf, int yf) {
+		int incrx = xf - xi/Math.abs(xf-xi); //Figures out which way to go : left or right
+		int incry = yf - yi/Math.abs(yf-yi); //Figures out which way to go : up or down
 		int i = xi + incrx;
 		int j = yi + incry;
 		while(i != xf && j != yf){

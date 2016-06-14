@@ -91,7 +91,23 @@ public class ChessGameCmdLine implements Observer{
 
 		System.out.print("\n Déplacement de 3,4 vers 4,3 = ");
 		chessGameControler.move(new Coord(3, 4), new Coord(4, 3));	// true		
+		
+		System.out.print("\n Déplacement de 0,0 vers 0,7 = ");
+		chessGameControler.move(new Coord(0, 0), new Coord(0, 7));	// false
+		
+		System.out.print("\n Déplacement de 1,0 vers 0,2 = ");
+		chessGameControler.move(new Coord(1, 0), new Coord(0, 2));	// true
 
+		System.out.print("\n Déplacement de 1,7 vers 1,5 = ");
+		chessGameControler.move(new Coord(1, 7), new Coord(1, 5));	// false
+		
+		System.out.print("\n Déplacement de 3,7 vers 3,1 = ");
+		chessGameControler.move(new Coord(3, 7), new Coord(3, 1));	// true
+
+		System.out.print("\n Déplacement de 4,0 vers 3,1 = ");
+		chessGameControler.move(new Coord(4, 0), new Coord(3, 1));	// true
+		
+		
 	}
 
 }

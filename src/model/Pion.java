@@ -24,7 +24,10 @@ public class Pion extends AbstractPiece {
 	public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk,
 			boolean isCastlingPossible) {
 		if(this.getCouleur().equals(Couleur.NOIR)){
-			if(yFinal - this.coord.y == 1 && Math.abs(xFinal - this.coord.x) <= 1){
+			if(yFinal - this.coord.y == 1 && Math.abs(xFinal - this.coord.x) == 1 && isCatchOk){
+				return true;
+			}
+			if(yFinal - this.coord.y == 1 && Math.abs(xFinal - this.coord.x) == 0){
 				return true;
 			}
 			if(yFinal - this.coord.y == 2 && firstMove){
@@ -32,7 +35,10 @@ public class Pion extends AbstractPiece {
 			}
 		}
 		else{
-			if(this.coord.y - yFinal == 1 && Math.abs(xFinal - this.coord.x) <= 1){
+			if(this.coord.y - yFinal == 1 && Math.abs(xFinal - this.coord.x) == 1 && isCatchOk){
+				return true;
+			}
+			if(this.coord.y - yFinal == 1 && Math.abs(xFinal - this.coord.x) == 0){
 				return true;
 			}
 			if(this.coord.y - yFinal == 2 && firstMove){
