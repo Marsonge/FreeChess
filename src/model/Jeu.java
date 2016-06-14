@@ -127,4 +127,9 @@ public class Jeu implements Game {
 		System.out.println(blancs);
 	}
 
+	public boolean isCastlingPossible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

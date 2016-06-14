@@ -2,10 +2,24 @@ package model;
 
 public class Roi extends AbstractPiece {
 
-	public Roi(Couleur couleur, Coord coord) {
-		super(couleur, coord);
+	private boolean hasMoved;
+	
+	public boolean hasMoved() {
+		return hasMoved;
 	}
 
+	public Roi(Couleur couleur, Coord coord) {
+		super(couleur, coord);
+		hasMoved = false;
+	}
+
+	@Override
+	public boolean move(int x,int y){
+		super.move(x,y);
+		if(!hasMoved)
+			hasMoved = true;
+		return true;
+	}
 
 	@Override
 	public boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk,

@@ -2,13 +2,28 @@ package model;
 
 public class Tour extends AbstractPiece {
 
+	private boolean hasMoved;
+	
 	public Tour(Couleur couleur, Coord coord) {
 		super(couleur, coord);
+		hasMoved = false;
 	}
 
 	@Override
 	public String getName() {
 		return "Rook";
+	}
+	
+	public boolean hasMoved() {
+		return hasMoved;
+	}
+	
+	@Override
+	public boolean move(int x,int y){
+		super.move(x,y);
+		if(!hasMoved)
+			hasMoved = true;
+		return true;
 	}
 
 	@Override
