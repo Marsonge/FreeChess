@@ -31,7 +31,7 @@ public class Roi extends AbstractPiece {
 				}
 			}
 		}
-		if(isCastlingPossible && Math.abs(xFinal - this.coord.x) == 2 && yFinal - this.coord.y == 0){
+		if(isCastlingPossible && (Math.abs(xFinal - this.coord.x) == 2 || Math.abs(xFinal - this.coord.x) == 3) && yFinal - this.coord.y == 0){
 			return true;
 		}
 		return false;

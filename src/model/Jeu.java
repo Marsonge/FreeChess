@@ -65,8 +65,11 @@ public class Jeu implements Game {
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		Pieces piece = this.findPiece(xInit, yInit);
 		try {
-			if(this.castling)
-				return piece.move(xFinal,yFinal) && castleRook(xInit,xFinal,yInit,yFinal);
+			if(this.castling){				
+				if(piece.getName().equals("Roi") && yFinal == yInit && Math.abs(xInit - xFinal)>1)
+					return castling(xInit,xFinal,yInit,yFinal) && piece.move(xFinal, yFinal);
+				return piece.move(xFinal, yFinal);
+			}
 			else
 				return piece.move(xFinal, yFinal);
 		} catch (NullPointerException e) {
@@ -74,18 +77,22 @@ public class Jeu implements Game {
 		}
 	}
 
-	private boolean castleRook(int xInit,int xFinal,int yInit,int yFinal){
+	private boolean castling(int xInit,int xFinal,int yInit,int yFinal){
 		Pieces rook;
 		int rxFinal;
-		if(xInit>xFinal){
+		if(xFinal==1){
 			rook = this.findPiece(0, yInit);
 			rxFinal = 2;
+			return rook.move(rxFinal, yFinal);
 		}
-		else{
+		else if(xFinal == 6){
 			rook = this.findPiece(7, yInit);
 			rxFinal = 5;
+			return rook.move(rxFinal, yFinal);
 		}
-		return rook.move(rxFinal, yFinal);
+		else{
+			return false;
+		}
 	}
 	
 	@Override

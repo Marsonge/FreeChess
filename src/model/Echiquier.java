@@ -95,17 +95,17 @@ public class Echiquier implements BoardGames {
 		return false;
 	}
 
-	private boolean isPieceBlocked(int xi, int xf, int yi, int yf) {
+	private boolean isPieceBlocked(int xi, int yi, int xf, int yf) {
 		if(Math.abs(xi-yi) == Math.abs(xf-yf)){ //If the piece is moving diagonally
-			return isDiagonalBlocked(xi,xf,yi,yf);
+			return isDiagonalBlocked(xi,yi,xf,yf);
 		}
-		else if(xi==xf ^ yi==yf){ //If the piece is moving laterally
-			return isLateralBlocked(xi,xf,yi,yf);
+		else if((xi==xf) ^ (yi==yf)){ //If the piece is moving laterally
+			return isLateralBlocked(xi,yi,xf,yf);
 		}
 		return false; //If it's not moving laterally or diagonally, it's a knight : can't be blocked
 	}
 
-	private boolean isLateralBlocked(int xi, int xf, int yi, int yf) {
+	private boolean isLateralBlocked(int xi, int yi, int xf, int yf) {
 		if(xi-xf == 0){
 			int incr = (yf - yi) / Math.abs(yf-yi); //Figures out which way to go : up or down
 			int i = yi + incr;
