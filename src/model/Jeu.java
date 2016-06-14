@@ -38,8 +38,8 @@ public class Jeu implements Game {
 		}
 	}
 
-	public void setCastling() {
-		this.castling = false;
+	public void setCastling(boolean b) {
+		this.castling = b;
 	}
 
 	@Override
@@ -65,12 +65,29 @@ public class Jeu implements Game {
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		Pieces piece = this.findPiece(xInit, yInit);
 		try {
-			return piece.move(xFinal, yFinal);
+			if(this.castling)
+				return piece.move(xFinal,yFinal) && castleRook(xInit,xFinal,yInit,yFinal);
+			else
+				return piece.move(xFinal, yFinal);
 		} catch (NullPointerException e) {
 			return false;
 		}
 	}
 
+	private boolean castleRook(int xInit,int xFinal,int yInit,int yFinal){
+		Pieces rook;
+		int rxFinal;
+		if(xInit>xFinal){
+			rook = this.findPiece(0, yInit);
+			rxFinal = 2;
+		}
+		else{
+			rook = this.findPiece(7, yInit);
+			rxFinal = 5;
+		}
+		return rook.move(rxFinal, yFinal);
+	}
+	
 	@Override
 	public boolean capture(int xCatch, int yCatch) {
 		Pieces piece = this.findPiece(xCatch, yCatch);
@@ -127,9 +144,20 @@ public class Jeu implements Game {
 		System.out.println(blancs);
 	}
 
-	public boolean isCastlingPossible() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isCastlingPossible(int xi,int xf,int yi, int yf) {
+		castling = false;
+		try{
+			if(xi>xf){
+				this.setCastling(!this.findPiece(0, yi).hasMoved() && !this.findPiece(xi, yi).hasMoved());
+			}
+			else{
+				this.setCastling(!this.findPiece(7,yi).hasMoved() && !this.findPiece(xi, yi).hasMoved());
+			}
+			return castling;
+		}
+		catch(NullPointerException e){
+			return false;
+		}
 	}
 
 }

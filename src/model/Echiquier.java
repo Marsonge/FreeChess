@@ -70,7 +70,6 @@ public class Echiquier implements BoardGames {
 
 	public boolean isMoveOk(int xi, int yi, int xf, int yf) {
 		boolean isCatchOk = false;
-		boolean isCastlingPossible = true;
 		if(w.isPieceHere(xf, yf)){
 			if(current==w){
 				this.setMessage("There's an allied piece on the way. " + current.getCouleur() + " to play.");
@@ -85,7 +84,7 @@ public class Echiquier implements BoardGames {
 			}
 			isCatchOk = true; //There's something to catch at the end
 		}
-		if(current.isMoveOk(xi, yi, xf, yf, isCatchOk, current.isCastlingPossible())){
+		if(current.isMoveOk(xi, yi, xf, yf, isCatchOk, current.isCastlingPossible(xi,xf,yi,yf))){
 				if(isPieceBlocked(xi,yi,xf,yf)){
 					this.setMessage("The way isn't clear to move. " + current.getCouleur() + " to play.");
 					return false;

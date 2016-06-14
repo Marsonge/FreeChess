@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,6 +24,7 @@ import controler.ChessGameControlers;
 import controler.controlerLocal.ChessGameControler;
 import model.Coord;
 import model.Couleur;
+import model.PieceIHM;
 import tools.ChessImageProvider;
 import tools.ChessPiecePos;
 
@@ -112,30 +114,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		if (chessPiece == null)
 			return;		
 		chessPiece.setVisible(false);
-		if(chessGameControler.move(translateCoord(parentLocation.x, parentLocation.y) , translateCoord(e.getX(),e.getY())))
-		{
-			Component c = chessBoard.findComponentAt(e.getX(), e.getY());
-			if (c instanceof JLabel) {
-				Container parent = c.getParent();
-				parent.remove(0);
-				parent.add(chessPiece);
-			} else {
-				Container parent = (Container) c;
-				parent.add(chessPiece);
-			}
-		}
-		else{
-			Component c = chessBoard.findComponentAt(parentLocation.x, parentLocation.y);
-			if (c instanceof JLabel) {
-				Container parent = c.getParent();
-				parent.remove(0);
-				parent.add(chessPiece);
-			} else {
-				Container parent = (Container) c;
-				parent.add(chessPiece);
-			}
-		}
-		chessPiece.setVisible(true);
+		chessGameControler.move(translateCoord(parentLocation.x, parentLocation.y) , translateCoord(e.getX(),e.getY()));
+
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -153,20 +133,28 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new ChessGameGUI();
-		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		frame.pack();
-		frame.setResizable(true);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println(chessGameControler.getMessage() + "\n");	
-
+		chessBoard.removeAll();
+		for (int i = 0; i < 64; i++) {
+			JPanel square = new JPanel(new BorderLayout());
+			chessBoard.add(square);
+			int row = (i / 8) % 2;
+			if (row == 0)
+				square.setBackground(i % 2 == 0 ? Color.gray : Color.white);
+			else
+				square.setBackground(i % 2 == 0 ? Color.white : Color.gray);
+		}
 		
+		for(PieceIHM p : (ArrayList<PieceIHM>) arg){
+			JLabel piece = new JLabel(new ImageIcon(
+					ChessImageProvider.getImageFile(p.getNamePiece(), p.getCouleur())));
+			JPanel panel = (JPanel) chessBoard.getComponent(p.getX()+p.getY()*8);
+			panel.add(piece);
+		}
 	}
 	
 	private Coord translateCoord(int x, int y){

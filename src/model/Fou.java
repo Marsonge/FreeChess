@@ -23,7 +23,14 @@ public class Fou extends AbstractPiece {
 	
 	@Override
 	public String getName() {
-		return "Bishop";
+		return "Fou";
+	}
+
+
+	@Override
+	public boolean hasMoved() {
+		//Doesn't matter for bishop
+		return true;
 	}
 
 }

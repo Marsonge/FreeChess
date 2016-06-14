@@ -11,7 +11,7 @@ public class Tour extends AbstractPiece {
 
 	@Override
 	public String getName() {
-		return "Rook";
+		return "Tour";
 	}
 	
 	public boolean hasMoved() {

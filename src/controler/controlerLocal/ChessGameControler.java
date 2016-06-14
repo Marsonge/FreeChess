@@ -17,17 +17,6 @@ public class ChessGameControler extends AbstractChessGameControler {
 		super(chessGame);
 	}
 
-	/* (non-Javadoc)
-	 * @see controler.AbstractChessGameControler#isPlayerOK(model.Coord)
-	 * 
-	 * cette méthode vérifie que la couleur de la pièce que l'utilisateur
-	 * tente de déplacer est bien celle du jeu courant
-	 * la vue se servira de cette information pour empêcher tout déplacement sur le damier
-	 */
-	@Override
-	public boolean isPlayerOK(Coord initCoord) {
-			return chessGame.getColorCurrentPlayer().equals(chessGame.getPieceColor(initCoord.x, initCoord.y));
-	}
 	
 	/* (non-Javadoc)
 	 * @see controler.AbstractChessGameControler#endMove(model.Coord, model.Coord, java.lang.String)

@@ -30,7 +30,7 @@ public class Pion extends AbstractPiece {
 			if(yFinal - this.coord.y == 1 && Math.abs(xFinal - this.coord.x) == 0){
 				return true;
 			}
-			if(yFinal - this.coord.y == 2 && firstMove){
+			if(yFinal - this.coord.y == 2 && firstMove && Math.abs(xFinal - this.coord.x) == 0){
 				return true;
 			}
 		}
@@ -41,7 +41,7 @@ public class Pion extends AbstractPiece {
 			if(this.coord.y - yFinal == 1 && Math.abs(xFinal - this.coord.x) == 0){
 				return true;
 			}
-			if(this.coord.y - yFinal == 2 && firstMove){
+			if(this.coord.y - yFinal == 2 && firstMove && Math.abs(xFinal - this.coord.x) == 0){
 				return true;
 			}
 		}
@@ -50,7 +50,13 @@ public class Pion extends AbstractPiece {
 	
 	@Override
 	public String getName() {
-		return "Pawn";
+		return "Pion";
+	}
+
+
+	@Override
+	public boolean hasMoved() {
+		return firstMove;
 	}
 
 }

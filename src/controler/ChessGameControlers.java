@@ -27,6 +27,5 @@ public interface ChessGameControlers {
 	 * @return une info dont la vue se servira 
 	 * pour empêcher tout déplacement sur le damier
 	 */
-	public boolean isPlayerOK(Coord initCoord);
 
 }

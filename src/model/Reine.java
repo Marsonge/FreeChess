@@ -30,7 +30,14 @@ public class Reine extends AbstractPiece {
 	
 	@Override
 	public String getName() {
-		return "Queen";
+		return "Reine";
+	}
+
+
+	@Override
+	public boolean hasMoved() {
+		//Doesn't matter
+		return true;
 	}
 
 

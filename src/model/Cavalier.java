@@ -9,7 +9,7 @@ public class Cavalier extends AbstractPiece{
 
 	@Override
 	public String getName() {
-		return "Knight";
+		return "Cavalier";
 	}
 	
 	@Override
@@ -23,6 +23,13 @@ public class Cavalier extends AbstractPiece{
 			}
 		}
 		return false;
+	}
+
+
+	@Override
+	public boolean hasMoved() {
+		//This doesn't matter for them
+		return true;
 	}
 
 }

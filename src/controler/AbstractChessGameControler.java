@@ -39,8 +39,6 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 		String promotionType = null; 
 
 		// si c'est bien au tour du joueur courant de jouer
-		if (this.isPlayerOK(initCoord)) {
-
 			// Déplacement métier
 			ret = this.moveModel(initCoord, finalCoord);	 
 
@@ -48,19 +46,8 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 			if (ret) {	
 				this.endMove(initCoord, finalCoord, promotionType);
 			}
-
-		}
 		return ret;
 	}
-
-	/* (non-Javadoc)
-	 * @see controler.AbstractChessGameControler#isPlayerOK(model.Coord)
-	 * 
-	 * cette méthode vérifie que la couleur de la pièce que l'utilisateur
-	 * tente de déplacer est bien celle du jeu courant
-	 * la vue se servira de cette information pour empêcher tout déplacement sur le damier
-	 */
-	public abstract boolean isPlayerOK(Coord initCoord) ;
 
 	// Déplacement métier
 	protected  boolean moveModel(Coord initCoord, Coord finalCoord)  {	
