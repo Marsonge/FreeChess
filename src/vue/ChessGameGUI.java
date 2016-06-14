@@ -60,26 +60,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		chessBoard.setPreferredSize(boardSize);
 		this.pack();
 		chessBoard.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
-
-//		for (int i = 0; i < 64; i++) {
-//			JPanel square = new JPanel(new BorderLayout());
-//			chessBoard.add(square);
-//
-//			int row = (i / 8) % 2;
-//			if (row == 0)
-//				square.setBackground(i % 2 == 0 ? new Color(44, 62, 80) : new Color(236, 240, 241));
-//			else
-//				square.setBackground(i % 2 == 0 ? new Color(236, 240, 241) : new Color(44, 62, 80));
-//		}
-//		
-//		for(ChessPiecePos c : ChessPiecePos.values()){
-//			for(Coord co : c.coords){
-//				JLabel piece = new JLabel(new ImageIcon(
-//						ChessImageProvider.getImageFile(c.nom, c.couleur)));
-//				JPanel panel = (JPanel) chessBoard.getComponent(co.x + (co.y*8));
-//				panel.add(piece);
-//			}
-//		}
 		
 	}
 
@@ -114,6 +94,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		if (chessPiece == null)
 			return;		
 		chessPiece.setVisible(false);
+		//Tell the controler to move this piece
 		chessGameControler.move(translateCoord(parentLocation.x, parentLocation.y) , translateCoord(e.getX(),e.getY()));
 
 	}
