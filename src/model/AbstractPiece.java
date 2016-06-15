@@ -142,6 +142,8 @@ public abstract class AbstractPiece implements Pieces{
 		return coord.y;
 	}
 	
+	public abstract boolean hasMoved();
+	
 	@Override
 	public abstract boolean isMoveOk(int xFinal, int yFinal, boolean isCatchOk,
 			boolean isCastlingPossible);

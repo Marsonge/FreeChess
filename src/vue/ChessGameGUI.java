@@ -60,6 +60,16 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 		chessBoard.setPreferredSize(boardSize);
 		this.pack();
 		chessBoard.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+		for (int i = 0; i < 64; i++) {
+			JPanel square = new JPanel(new BorderLayout());
+			chessBoard.add(square);
+			int row = (i / 8) % 2;
+			if (row == 0)
+				square.setBackground(i % 2 == 0 ? new Color(44, 62, 80) : new Color(236, 240, 241));
+			else
+				square.setBackground(i % 2 == 0 ? new Color(236, 240, 241) : new Color(44, 62, 80));
+		
+		}
 		
 	}
 
@@ -119,15 +129,18 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println(chessGameControler.getMessage() + "\n");	
-		chessBoard.removeAll();
+		//chessBoard.removeAll();
 		for (int i = 0; i < 64; i++) {
-			JPanel square = new JPanel(new BorderLayout());
-			chessBoard.add(square);
-			int row = (i / 8) % 2;
-			if (row == 0)
-				square.setBackground(i % 2 == 0 ? new Color(44, 62, 80) : new Color(236, 240, 241));
-			else
-				square.setBackground(i % 2 == 0 ? new Color(236, 240, 241) : new Color(44, 62, 80));
+//			JPanel square = new JPanel(new BorderLayout());
+//			chessBoard.add(square);
+//			int row = (i / 8) % 2;
+//			if (row == 0)
+//				square.setBackground(i % 2 == 0 ? new Color(44, 62, 80) : new Color(236, 240, 241));
+//			else
+//				square.setBackground(i % 2 == 0 ? new Color(236, 240, 241) : new Color(44, 62, 80));
+		
+		((JPanel)chessBoard.getComponent(i)).removeAll();
+
 		}
 		
 		for(PieceIHM p : (ArrayList<PieceIHM>) arg){
@@ -136,6 +149,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 			JPanel panel = (JPanel) chessBoard.getComponent(p.getX()+p.getY()*8);
 			panel.add(piece);
 		}
+		this.repaint();
+		this.revalidate();
 	}
 	
 	private Coord translateCoord(int x, int y){

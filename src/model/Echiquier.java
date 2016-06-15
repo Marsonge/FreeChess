@@ -96,7 +96,8 @@ public class Echiquier implements BoardGames {
 	}
 
 	private boolean isPieceBlocked(int xi, int yi, int xf, int yf) {
-		if(Math.abs(xi-yi) == Math.abs(xf-yf)){ //If the piece is moving diagonally
+		if(Math.abs(xi-xf) == Math.abs(yi-yf)){ //If the piece is moving diagonally
+			System.out.println("xi + yi : " + xi + " " + yi + " xf + yf " + xf + " " + yf);
 			return isDiagonalBlocked(xi,yi,xf,yf);
 		}
 		else if((xi==xf) ^ (yi==yf)){ //If the piece is moving laterally
