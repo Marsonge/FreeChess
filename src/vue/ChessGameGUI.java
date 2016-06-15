@@ -129,17 +129,9 @@ public class ChessGameGUI extends JFrame implements MouseListener,
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println(chessGameControler.getMessage() + "\n");	
-		//chessBoard.removeAll();
-		for (int i = 0; i < 64; i++) {
-//			JPanel square = new JPanel(new BorderLayout());
-//			chessBoard.add(square);
-//			int row = (i / 8) % 2;
-//			if (row == 0)
-//				square.setBackground(i % 2 == 0 ? new Color(44, 62, 80) : new Color(236, 240, 241));
-//			else
-//				square.setBackground(i % 2 == 0 ? new Color(236, 240, 241) : new Color(44, 62, 80));
 		
-		((JPanel)chessBoard.getComponent(i)).removeAll();
+		for (int i = 0; i < 64; i++) {
+		((JPanel)chessBoard.getComponent(i)).removeAll(); //Removes chesspieces
 
 		}
 		
